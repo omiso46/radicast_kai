@@ -1,3 +1,47 @@
+# radicast改
+いまさらだけど、ちゃんとforkしないと…<br>
+<br>
+radicastをforkし、改造したradcastをマージ<br>
+オリジナルと同名は混乱を招くので<br>
+
+## 必要パッケージ
+* ffmpeg
+
+## インストール
+```
+$ go install github.com/omiso46/radcast_kai@latest
+```
+
+## 使い方
+### 設定ファイル
+```
+$ radcast --setup > config.json
+$ vim config.json
+
+{
+  "FMT": [
+    "00 17 * * *"
+  ]
+}
+```
+cron specification is [here](https://godoc.org/github.com/robfig/cron#hdr-CRON_Expression_Format)
+
+### 設定ファイルのリロード
+```
+$ kill -HUP nnn
+```
+
+## LICENSE
+* MIT
+
+## お約束
+録音ファイルは個人使用の範囲内で。絶対！
+
+
+---
+---
+# Original README
+
 [![wercker status](https://app.wercker.com/status/6a50ede5efd0abd5b078ab080fe7b61c/s/master "wercker status")](https://app.wercker.com/project/bykey/6a50ede5efd0abd5b078ab080fe7b61c)
 # radicast
 
