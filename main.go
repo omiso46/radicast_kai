@@ -11,14 +11,12 @@ import (
 
 var (
 	host       = flag.String("host", "0.0.0.0", "host")
-	port       = flag.String("port", "3355", "port")
+	port       = flag.String("port", "8000", "port")
 	buffer     = flag.Int64("buffer", 60, "buffer for recording")
 	output     = flag.String("output", "output", "output")
-	bitrate    = flag.String("bitrate", "64k", "bitrate")
-	title      = flag.String("title", "radicast", "title")
+	title      = flag.String("title", "radicast_kai", "title")
 	configPath = flag.String("config", "config.json", "path of config.json")
 	setup      = flag.Bool("setup", false, "initialize json configuration")
-	converter  = flag.String("converter", "", "ffmpeg or avconv. If not set this option, radicast search its automatically.")
 )
 
 func main() {
@@ -36,15 +34,12 @@ func main() {
 
 func runRadicast() error {
 
-	if *converter == "" {
-		cmd, err := lookConverterCommand()
-		if err != nil {
-			return err
-		}
-		*converter = cmd
+	converter, err := lookConverterCommand()
+	if err != nil {
+		return err
 	}
 
-	r := NewRadicast(*configPath, *host, *port, *title, *output, *bitrate, *buffer, *converter)
+	r := NewRadicast(*configPath, *host, *port, *title, *output, *buffer, converter)
 
 	signalChan := make(chan os.Signal, 1)
 	signal.Notify(signalChan, os.Interrupt, os.Kill, syscall.SIGHUP)
@@ -80,5 +75,4 @@ func runSetup() {
 	if err := SetupConfig(ctx); err != nil {
 		log.Fatal(err)
 	}
-	return
 }

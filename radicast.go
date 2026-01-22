@@ -9,7 +9,7 @@ import (
 	"os"
 	"sync"
 
-	"github.com/robfig/cron"
+	"github.com/robfig/cron/v3"
 )
 
 type Radicast struct {
@@ -25,12 +25,11 @@ type Radicast struct {
 	port       string
 	title      string
 	output     string
-	bitrate    string
 	buffer     int64
 	converter  string
 }
 
-func NewRadicast(path string, host string, port string, title string, output string, bitrate string, buffer int64, converter string) *Radicast {
+func NewRadicast(path string, host string, port string, title string, output string, buffer int64, converter string) *Radicast {
 	ctx, cancel := context.WithCancel(context.Background())
 
 	r := &Radicast{
@@ -43,7 +42,6 @@ func NewRadicast(path string, host string, port string, title string, output str
 		port:       port,
 		title:      title,
 		output:     output,
-		bitrate:    bitrate,
 		buffer:     buffer,
 		converter:  converter,
 	}
@@ -130,7 +128,6 @@ func (r *Radicast) ReloadConfig() error {
 
 					radiko := &Radiko{
 						Station:   station,
-						Bitrate:   r.bitrate,
 						Buffer:    r.buffer,
 						Converter: r.converter,
 						TempDir:   dir,
@@ -157,5 +154,5 @@ func (r *Radicast) ReloadConfig() error {
 }
 
 func (r *Radicast) Log(v ...interface{}) {
-	log.Println("[radicast]", fmt.Sprint(v...))
+	log.Println("[radicast_kai]", fmt.Sprint(v...))
 }
