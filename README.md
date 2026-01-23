@@ -2,7 +2,6 @@
 いまさらだけど、ちゃんとforkしないと…<br>
 <br>
 radicastをforkし、改造したradcastをマージ<br>
-オリジナルと同名は混乱を招くので<br>
 
 ## 必要パッケージ
 * ffmpeg
