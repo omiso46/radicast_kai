@@ -8,13 +8,13 @@ radicastをforkし、改造したradcastをマージ<br>
 
 ## インストール
 ```
-$ go install github.com/omiso46/radcast_kai@latest
+$ go install github.com/omiso46/radicast@latest
 ```
 
 ## 使い方
 ### 設定ファイル
 ```
-$ radcast --setup > config.json
+$ radicast --setup > config.json
 $ vim config.json
 
 {
